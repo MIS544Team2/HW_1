@@ -22,62 +22,24 @@ oauth = OAuth(ACCESS_TOEKN, ACEESS_KEY, CONSUMER_KEY,CONSUMER_SECRET)
 psearch = Twitter(auth=oauth)
 
 
+pos_tweets=[]
+neg_tweets=[]
+queries_pos = [ '@IBM :)','@Microsoft :)','@generalelectric :)','@SAP :)','@Oracle :)','@exxonmobil :)','@HP :)','@Accenture :)','@FedEx :)','@Siemens :)','@Cisco :)','@jpmorgan :)','@intel :)','@UBS :)','@Boeing :)','@JohnDeere :)','@northropgrumman :)','@Huawei :)','@CaterpillarInc :)','@UPS :)']
+queries_neg = [ '@IBM :(','@Microsoft :(','@generalelectric :(','@SAP :(','@Oracle :(','@exxonmobil :(','@HP :(','@Accenture :(','@FedEx :(','@Siemens :(','@Cisco :(','@jpmorgan :(','@intel :(','@UBS :(','@Boeing :(','@JohnDeere :(','@northropgrumman :(','@Huawei :(','@CaterpillarInc :(','@UPS :(']
 
-def pos(query):
-    global psearch    
-    pos_tweets = psearch.search.tweets(q='@IBM :)', count=100)
-#    print(pos_tweets)
-    with open('q5_pos.txt', 'a', encoding='utf-8') as f:
-        json.dump(pos_tweets, f)
-    return
+# Search and Save tweets in json file
+for query in queries_pos:
+    pos_search = psearch.search.tweets(q= query, count=100)
+    pos_tweets.extend(pos_search['statuses'])
 
-def neg(query):
-    global psearch    
-    neg_tweets = psearch.search.tweets(q=query, count=100)
-#    print(neg_tweets)
-    with open('q5_neg.json', 'a', encoding='utf8') as f:
-        json.dump(neg_tweets, f)
-    return
+with open('q5_pos.txt', 'w', encoding='utf8') as f:
+    json.dump(pos_tweets, f, ensure_ascii=False)
 
-pos(query = '@IBM :)')
-pos(query = '@Microsoft :)')
-pos(query = '@generalelectric :)')
-pos(query = '@SAP :)')
-pos(query = '@Oracle :)')
-pos(query = '@exxonmobil :)')
-pos(query = '@HP :)')
-pos(query = '@Accenture :)')
-pos(query = '@FedEx :)')
-pos(query = '@Siemens :)')
-pos(query = '@Cisco :)')
-pos(query = '@jpmorgan :)')
-pos(query = '@intel :)')
-pos(query = '@UBS :)')
-pos(query = '@Boeing :)')
-pos(query = '@JohnDeere :)')
-pos(query = '@northropgrumman :)')
-pos(query = '@Huawei :)')
-pos(query = '@CaterpillarInc :)')
-pos(query = '@UPS :)')
 
-neg(query = '@IBM :(')
-neg(query = '@Microsoft :(')
-neg(query = '@generalelectric :(')
-neg(query = '@SAP :(')
-neg(query = '@Oracle :(')
-neg(query = '@exxonmobil :(')
-neg(query = '@HP :(')
-neg(query = '@Accenture :(')
-neg(query = '@FedEx :(')
-neg(query = '@Siemens :(')
-neg(query = '@Cisco :(')
-neg(query = '@jpmorgan :(')
-neg(query = '@intel :(')
-neg(query = '@UBS :(')
-neg(query = '@Boeing :(')
-neg(query = '@JohnDeere :(')
-neg(query = '@northropgrumman :(')
-neg(query = '@Huawei :(')
-neg(query = '@CaterpillarInc :(')
-neg(query = '@UPS :(')
-   
+for query in queries_neg:
+    neg_search = psearch.search.tweets(q= query, count=100)
+    neg_tweets.extend(neg_search['statuses'])
+
+with open('q5_neg.txt', 'w', encoding='utf8') as f:
+    json.dump(neg_tweets, f, ensure_ascii=False)
+
