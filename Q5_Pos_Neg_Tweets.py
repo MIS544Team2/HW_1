@@ -8,7 +8,6 @@ except ImportError:
 from twitter import *
 import re
 
-
 # Variables that contains the user credentials to access Twitter API
 ACCESS_TOEKN = '298895919-sZSRQi67wIogm33GPZ3ZuGWjWRlp9aEfa6Teqrbn'
 ACEESS_KEY = 'TmmVLRxV2NF9ALVrKsjhYLc1TOmgGvkJJ0sH5dLGWELEG'
@@ -24,6 +23,7 @@ psearch = Twitter(auth=oauth)
 
 pos_tweets=[]
 neg_tweets=[]
+# searching queries
 queries_pos = [ '@IBM :)','@Microsoft :)','@generalelectric :)','@SAP :)','@Oracle :)','@exxonmobil :)','@HP :)','@Accenture :)','@FedEx :)','@Siemens :)','@Cisco :)','@jpmorgan :)','@intel :)','@UBS :)','@Boeing :)','@JohnDeere :)','@northropgrumman :)','@Huawei :)','@CaterpillarInc :)','@UPS :)']
 queries_neg = [ '@IBM :(','@Microsoft :(','@generalelectric :(','@SAP :(','@Oracle :(','@exxonmobil :(','@HP :(','@Accenture :(','@FedEx :(','@Siemens :(','@Cisco :(','@jpmorgan :(','@intel :(','@UBS :(','@Boeing :(','@JohnDeere :(','@northropgrumman :(','@Huawei :(','@CaterpillarInc :(','@UPS :(']
 
