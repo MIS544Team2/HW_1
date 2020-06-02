@@ -12,6 +12,8 @@ from nltk.tokenize import word_tokenize
 # nltk.download('stopwords')
 from nltk.corpus import stopwords
 import random
+from nltk import *
+import collections
 
 #--------Import positive dataset retrieved from Q5 and write in data frame
 data = json.load(open('q5_pos.txt'))
@@ -79,7 +81,9 @@ random.shuffle(document)
 #test_neg= tweet_df_neg.drop(train_neg.index)
 
 #-------- Extract tokens and remove stopwords in Train sets
-stop_words=set(stopwords.words('english') + list(punctuation) + ['AT_USER','URL'])
+
+#stop_words=set(stopwords.words('english') + list(punctuation) + ['AT_USER','URL'])
+stop_words=set(stopwords.words('english') + ['AT_USER','URL'])
 def tweet_prep(tweets):
     # Extract all words in the training set and break into token features 
     all_tokens=[]
@@ -117,6 +121,23 @@ testing_set= featuresets[500:]
 classifier = nltk.NaiveBayesClassifier.train(training_set)
 
 print("Classifier accuracy percent:",(nltk.classify.accuracy(classifier, testing_set))*100)
-classifier.show_most_informative_features(15)
+# print(classifier.show_most_informative_features())
+
+
+refsets = collections.defaultdict(set)
+testsets = collections.defaultdict(set)
+for i, (feats, label) in enumerate(testing_set):
+    refsets[label].add(i)
+    observed = classifier.classify(feats)
+    testsets[observed].add(i)
+
+print("Pos Precision:", (nltk.precision(refsets['pos'], testsets['pos'])))
+print("Pos Recall:", (nltk.recall(refsets['pos'], testsets['pos'])))
+print("Pos F-Score:", (nltk.f_measure(refsets['pos'], testsets['pos'])))
+print("Neg Precision:", (nltk.precision(refsets['neg'], testsets['neg'])))
+print("Neg Recall:", (nltk.recall(refsets['neg'], testsets['neg'])))
+print("Neg F-Score:", (nltk.f_measure(refsets['neg'], testsets['neg'])))
+
+
 
 
