@@ -9,10 +9,10 @@ from twitter import *
 import re
 
 # Variables that contains the user credentials to access Twitter API
-ACCESS_TOEKN = '298895919-sZSRQi67wIogm33GPZ3ZuGWjWRlp9aEfa6Teqrbn'
-ACEESS_KEY = 'TmmVLRxV2NF9ALVrKsjhYLc1TOmgGvkJJ0sH5dLGWELEG'
-CONSUMER_KEY = 'UZyQkQ9ZgRAXV6ivtIur6uped'
-CONSUMER_SECRET = 'FzdnjWOPOZsbKnLd9UthNEKr5erLcSc2ZAGPgYtHwLwnCvcrgX'
+ACCESS_TOEKN = 'xxxxxx'
+ACEESS_KEY = 'xxxxxx'
+CONSUMER_KEY = 'xxxxxx'
+CONSUMER_SECRET = 'xxxxxx'
 
 oauth = OAuth(ACCESS_TOEKN, ACEESS_KEY, CONSUMER_KEY,CONSUMER_SECRET)
 
